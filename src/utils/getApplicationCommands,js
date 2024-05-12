@@ -1,0 +1,15 @@
+const getApplicationCommands = async (client, guildId) => {
+  let applicationCommands = [];
+
+  if (guildId) {
+    const guild = await client.guild.fetch(guildId);
+    applicationCommands = guild.applicationCommands;
+  } else {
+    applicationCommands = await client.application.commands;
+  }
+
+  await applicationCommands.fetch();
+  return applicationCommands;
+}
+
+export default getApplicationCommands;
