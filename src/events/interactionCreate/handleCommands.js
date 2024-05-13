@@ -26,7 +26,6 @@ const handleCommands = async (client, interaction) => {
           });
           break;
         }
-        console.log(commandObj);
       }
     }
 

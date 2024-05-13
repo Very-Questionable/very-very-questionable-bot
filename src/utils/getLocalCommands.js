@@ -6,7 +6,6 @@ const getLocalCommands = async (exceptions = []) => {
   let localCommands = [];
 
   const commandCategories = getAllFiles(path.join(import.meta.dirname, '..', 'commands'), true);
-  // const  = getAllFiles(path.join(import.meta.dirname, '..', 'commands'), true);
   
   for (const commandCategory of commandCategories) {
     const commandFiles = getAllFiles(commandCategory);
