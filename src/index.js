@@ -75,20 +75,6 @@ const guildId = parseInt(process.env.GUILD_ID);
 //   return messages;
 // }
 
-// const rest = new REST().setToken(process.env.DISCORD_TOKEN);
-
-// const loadApplications = async () => {
-//   try {
-//     await rest.put(
-//       Routes.applicationCommands(clientId, guildId),
-//       { body: commands }
-//     );
-//     console.log('commands loaded');
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
-
 eventHandler(client);
 
 // loadApplications();
