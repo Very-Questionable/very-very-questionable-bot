@@ -1,4 +1,3 @@
-import { write } from 'fs';
 import getAllMessages from '../../utils/getAllMessages.js';
 import fs from 'fs/promises';
 import os from 'os';
@@ -8,6 +7,8 @@ const speadsheet = {
   description: 'gym spreadsheet',
   options: [],
   callback: async (client, interaction) => {
+    await interaction.deferReply({ ephemeral: true });
+
     const messages = await getAllMessages(client, interaction.channelId);
 
     const buffer = [];
@@ -38,13 +39,13 @@ const speadsheet = {
 
     const cleanedData = formatData(res);
     const dest = await storeSpreadsheet(cleanedData);
-    
-    await interaction.reply({
+
+    await interaction.editReply({
       content: "Here is you're spreadsheet :D",
       files: [dest],
       ephemeral: true,
     });
-    
+
     console.log(`spreadsheet sent to ${dest}`);
   },
 };
@@ -64,7 +65,7 @@ const formatData = (data) => {
       `${entry.exersise},${entry.timestamp.toLocaleDateString('en-GB')},${entry.content.join(',')},${entry.notes}\n`
   );
 
-  res.unshift('Exersise,Timestamp,Weight 1,Weight 2,Weight 3,Rep 1,Rep 2,Rep 3,Notes\n');
+  res.unshift('Exersise,Timestamp,Weight 1,Weight 2,Weight 3,Set 1,Set 2,Set 3,Notes\n');
   res.unshift('\ufeff');
   return res;
 };
