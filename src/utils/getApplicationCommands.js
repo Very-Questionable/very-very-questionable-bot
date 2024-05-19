@@ -1,3 +1,9 @@
+/**
+ * Get the most recent list of commands within a specified guild
+ * @param {*} client 
+ * @param {*} guildId 
+ * @returns 
+ */
 const getApplicationCommands = async (client, guildId) => {
   let applicationCommands = [];
   if (guildId) {

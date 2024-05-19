@@ -1,7 +1,12 @@
 import path from 'path';
 import { getAllFiles } from './getAllFiles.js';
 
-
+/**
+ * Iterates through the commands folder and returns a list of pathnames to the folder
+ * to import later
+ * @param {*} exceptions 
+ * @returns 
+ */
 const getLocalCommands = async (exceptions = []) => {
   let localCommands = [];
 

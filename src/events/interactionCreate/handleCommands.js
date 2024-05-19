@@ -1,5 +1,11 @@
 import getLocalCommands from '../../utils/getLocalCommands.js';
 
+/**
+ * Given an input, run the interaction event by obtaining the command callback
+ * @param {*} client 
+ * @param {*} interaction - desired command 
+ * @returns 
+ */
 const handleCommands = async (client, interaction) => {
   if (!interaction.isChatInputCommand()) return;
 

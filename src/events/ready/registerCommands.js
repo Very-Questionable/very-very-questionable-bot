@@ -2,6 +2,11 @@ import { getConfig } from '../../utils/datastore.js';
 import getLocalCommands from '../../utils/getLocalCommands.js';
 import getApplicationCommands from '../../utils/getApplicationCommands.js';
 
+/**
+ * registerCommands - upon startup, iterate through commands folders and uploads
+ * commands to the bot as needed
+ * @param {*} client
+ */
 const registerCommands = async (client) => {
   const { testGuild } = getConfig();
   try {
