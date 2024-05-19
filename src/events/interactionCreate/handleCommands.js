@@ -1,4 +1,3 @@
-import { getConfig } from '../../utils/datastore.js';
 import getLocalCommands from '../../utils/getLocalCommands.js';
 
 const handleCommands = async (client, interaction) => {
@@ -9,13 +8,6 @@ const handleCommands = async (client, interaction) => {
   try {
     const commandObj = localCommands.find((cmd) => cmd.default.name === interaction.commandName)?.default;
     if (!commandObj) return;
-    // if (!devs.include(interaction.member.id)) {
-    //   interaction.reply({
-    //     content: 'only devs can run this command',
-    //     ephemeral: true
-    //   })
-    //  return
-    // }
 
     if (commandObj.permissionsRequired) {
       for (const perm of commandObj.permissionsRequired) {

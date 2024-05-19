@@ -11,7 +11,7 @@ const registerCommands = async (client) => {
     for (const localCommand of localCommands) {
       const { name, description, options } = localCommand.default;
       const existingCommand = await applicationCommands.cache.find((res) => res.name === name);
-      
+
       if (existingCommand) {
         if (localCommand.default.deleted) {
           await applicationCommands.delete(existingCommand.id);
@@ -31,7 +31,6 @@ const registerCommands = async (client) => {
           console.log(`Skipping command "${name}"`);
           continue;
         }
-
 
         await applicationCommands.create({
           name,

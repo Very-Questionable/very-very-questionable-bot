@@ -1,25 +1,56 @@
+import { ApplicationCommandOptionType } from 'discord.js';
 import getAllMessages from '../../utils/getAllMessages.js';
 import fs from 'fs/promises';
-import os from 'os';
+import os, { type } from 'os';
 
 const speadsheet = {
   name: 'speadsheet',
   description: 'gym spreadsheet',
-  options: [],
+  options: [
+    {
+      name: 'target-user',
+      description: 'The user to generate a spreadsheat from',
+      type: ApplicationCommandOptionType.Mentionable,
+    },
+    {
+      name: 'channel',
+      description: 'Name of the channel with the Data',
+      type: ApplicationCommandOptionType.Channel,
+    },
+    {
+      name: 'filter',
+      description: 'Exersise filter, name an exersise for a that specific exersise',
+      type: ApplicationCommandOptionType.String,
+    },
+  ],
   callback: async (client, interaction) => {
     await interaction.deferReply({ ephemeral: true });
 
-    const messages = await getAllMessages(client, interaction.channelId);
+    const targetUser = interaction.options.getUser('target-user')?.id;
+    const targetChannel = interaction.options.getChannel('channel')?.id;
+    const targetFilter = interaction.options.getString('filter');
+    const messages = await getAllMessages(client, targetChannel ? targetChannel : interaction.channelId);
+    console.log(interaction);
 
+    // splits on newlines and applies filter if needed
     const buffer = [];
     for (const msg of messages) {
+      // Checks the msg author is the correct target
+      if (targetUser && msg.author.id !== targetUser) continue;
+      if (!targetUser && msg.author.id !== interaction.user.id) continue;
+
+      // Applies Formatting and Filters for exersises
       msg.content.split('\n').forEach((content) => {
+        if (!content.match(/(,\s*[123456790-]+\s*){6},?/)) return;
+        if (targetFilter && !content.match(targetFilter)) return;
+
         buffer.push({
           content: content,
           timestamp: msg.createdTimestamp,
         });
       });
     }
+
     const res = buffer.map((msg) => {
       const buffer = msg.content.split(',');
       const exersise = buffer.splice(0, 1);
