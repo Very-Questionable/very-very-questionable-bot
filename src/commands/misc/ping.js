@@ -1,9 +1,9 @@
 const command = {
   name: 'ping',
   description: 'pings',
-  callback: (client, interaction) => {
+  callback: async (_client, interaction) => {
     interaction.reply(
-      'https://tenor.com/view/sion-eltnam-atlasia-fate-sion-under-night-in-birth-tsukihime-gif-323335150836168038'
+      'https://i.redd.it/5xoic5durzd81.png'
     );
   },
 };
