@@ -30,7 +30,6 @@ const speadsheet = {
     const targetChannel = interaction.options.getChannel('channel')?.id;
     const targetFilter = interaction.options.getString('filter');
     const messages = await getAllMessages(client, targetChannel ? targetChannel : interaction.channelId);
-    console.log(interaction);
 
     // splits on newlines and applies filter if needed
     const buffer = [];

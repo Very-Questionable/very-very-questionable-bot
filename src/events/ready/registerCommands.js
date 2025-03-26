@@ -24,13 +24,12 @@ const registerCommands = async (client) => {
           continue;
         }
 
-        // if (areCommandsDifferent(existingCommand, localCommand)) {
         await applicationCommands.edit(existingCommand.id, {
           description,
           options,
         });
         console.log(`Edited Command ${name}.`);
-        // }
+        
       } else {
         if (localCommand.default.deleted) {
           console.log(`Skipping command "${name}"`);
